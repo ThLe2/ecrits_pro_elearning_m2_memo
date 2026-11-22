@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>La grammaire qui piège</title>
+<style>
+:root{--prune:#8C1E70;--prune-fonce:#5E1349;--prune-clair:#F4E6EE;--accent:#C77BAA;
+ --vert:#283C28;--gris:#3C3C3C;--gris-moyen:#8A7A85;--filet:#E8DCE5;--creme:#FAF6F8;
+ --ok:#2F7A4F;--ko:#B23B3B;--amb:#B5852A;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--creme);color:var(--gris);
+ font-family:"Nunito","Segoe UI",Helvetica,Arial,sans-serif;font-size:16px;line-height:1.62}
+.wrap{max-width:900px;margin:0 auto;padding:0 18px 60px}
+header.bandeau{background:var(--prune-fonce);color:#fff;padding:18px 0;border-bottom:4px solid var(--accent)}
+header.bandeau .wrap{padding-bottom:0}
+.chapitre{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#EAD3E3}
+.chapitre span{color:var(--accent);margin:0 6px}
+h1{font-family:Georgia,"Times New Roman",serif;font-size:27px;line-height:1.25;margin:8px 0 4px;color:#fff}
+.sous{color:#EAD3E3;font-size:14.5px;margin:0}
+h2{font-family:Georgia,"Times New Roman",serif;font-size:20px;color:var(--prune-fonce);
+ margin:34px 0 0;padding-bottom:8px;border-bottom:2px solid var(--filet)}
+h2 .num{color:var(--accent);margin-right:8px}
+h3{font-size:15px;color:var(--vert);margin:20px 0 8px;letter-spacing:.02em}
+.carte{background:#fff;border:1px solid var(--filet);border-radius:10px;padding:20px 22px;margin:18px 0;
+ box-shadow:0 1px 2px rgba(94,19,73,.05)}
+.enc{background:var(--prune-clair);border-left:5px solid var(--prune);padding:14px 18px;
+ border-radius:0 8px 8px 0;margin:18px 0;font-size:15.2px}
+.enc .t{display:block;font-size:11.5px;letter-spacing:.11em;text-transform:uppercase;
+ font-weight:800;color:var(--prune-fonce);margin-bottom:6px}
+.enc.al{background:#FBF4F4;border-left-color:var(--ko)}.enc.al .t{color:var(--ko)}
+.enc.ci{background:#FCF8F0;border-left-color:var(--amb)}.enc.ci .t{color:#8A6418}
+.situ{background:#FCF9FB;border:1px dashed var(--filet);border-radius:8px;padding:16px 18px;margin:16px 0;font-size:15.2px}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+.duo>div{background:#fff;border:1px solid var(--filet);border-radius:9px;padding:15px 17px;font-size:14.8px}
+.duo .h{font-weight:800;color:var(--prune-fonce);margin-bottom:7px;font-size:14.5px}
+.tri{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
+.tri>div{background:#fff;border:1px solid var(--filet);border-radius:9px;padding:14px 15px;font-size:14.3px}
+.quad{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}
+.quad>div{background:#fff;border:1px solid var(--filet);border-radius:9px;padding:12px 13px;font-size:13.6px}
+.quad .h{font-weight:800;color:var(--prune-fonce);margin-bottom:6px;font-size:13px;
+ text-transform:uppercase;letter-spacing:.04em}
+.tri .h{font-weight:800;color:var(--prune-fonce);margin-bottom:6px;font-size:13.5px;
+ text-transform:uppercase;letter-spacing:.05em}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.8px;background:#fff}
+th,td{border:1px solid var(--filet);padding:9px 12px;text-align:left}
+thead th{background:var(--prune-clair);color:var(--prune-fonce);font-size:13.5px}
+tbody th{font-weight:600;color:var(--gris)}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.tot td,tr.tot th{background:#FBF3F8;font-weight:800;color:var(--prune-fonce)}
+.dl{display:inline-flex;align-items:center;gap:9px;background:var(--prune);color:#fff;text-decoration:none;
+ padding:11px 20px;border-radius:8px;font-weight:700;font-size:15px;margin:20px 0 4px}
+.dl:hover{background:var(--prune-fonce)}
+ol.q{padding-left:0;list-style:none;counter-reset:q}
+ol.q>li{margin:16px 0;padding-left:38px;position:relative}
+ol.q>li::before{counter-increment:q;content:counter(q);position:absolute;left:0;top:1px;
+ width:26px;height:26px;border-radius:50%;background:var(--prune-clair);color:var(--prune-fonce);
+ font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center}
+b,strong{color:var(--vert)}
+footer{text-align:center;font-size:12.5px;color:var(--gris-moyen);padding:26px 18px 12px;
+ border-top:1px solid var(--filet);margin-top:44px}
+@media(max-width:860px){.quad{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.duo,.tri,.quad{grid-template-columns:1fr}h1{font-size:22px}}
+@media print{body{background:#fff}.dl{display:none}header.bandeau{background:#5E1349 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+td{vertical-align:top}td:first-child{white-space:nowrap}@media(max-width:640px){td:first-child{white-space:normal}.carte table{display:block;overflow-x:auto;max-width:100%}}</style></head>
+<body>
+<header class="bandeau"><div class="wrap">
+ <div class="chapitre">Écrits professionnels · @learning <span>/</span> Séquence 2</div><h1>La grammaire qui piège</h1><p class="sous">Fiche mémo — Participe passé, subjonctif, « si », conjugaisons courantes</p>
+</div></header>
+<div class="wrap">
+<a class="dl" href="EP_elearning_S2_Fiche_memo.pdf" download>⬇ Télécharger la fiche mémo (PDF)</a>
+<h2><span class="num">1 ·</span>Le participe passé</h2>
+<div class="carte">
+<p>Trois cas suffisent pour la quasi-totalité des écrits professionnels. COD = complément d'objet direct : on le trouve en posant la question « quoi ? » après le verbe. Pour <b>ENTENDRE</b> l'accord, remplacez le participe par <b>mis</b> ou <b>pris</b> : le féminin « envoyée » ne s'entend pas, « mise » et « prise » s'entendent. Le test révèle le féminin ; le pluriel se déduit du mot repris.</p>
+<table><thead><tr><th>Cas</th><th>La règle</th><th>Exemples justes</th></tr></thead><tbody><tr><td><b>Avec être</b></td><td>Le participe s'accorde avec le <b>sujet</b>. « Ont été » compte comme être (forme passive).</td><td>La demande est <b>acceptée</b> · Les factures ont été <b>envoyées</b></td></tr><tr><td><b>Avec avoir</b></td><td>Pas d'accord avec le sujet. Le participe s'accorde avec le <b>COD, à condition qu'il soit placé AVANT</b> le verbe (que, la, les…).</td><td>Nous avons <b>reçu</b> vos pièces · Les pièces que vous avez <b>fournies</b> · Ces documents, nous les avons <b>signés</b></td></tr><tr><td><b>Verbe pronominal courant</b></td><td>S'engager, s'apercevoir, se tromper… : accord avec le <b>sujet</b>. Attention : pas d'accord quand le verbe est suivi d'un complément direct (se permettre <b>de</b>, se rendre <b>compte</b>) ou quand « se » veut dire « à soi » (se téléphoner, se parler).</td><td>Votre conseillère s'est <b>engagée</b> · Nous nous sommes <b>aperçus</b> de l'erreur · Nous nous sommes <b>permis</b> de vous relancer</td></tr><tr><td><b>Le test</b></td><td>Remplacez par <b>mis / mise</b> ou <b>pris / prise</b>. La même astuce donne la lettre finale : subie → subi, sans t ; prise → pris, avec s.</td><td>Les pièces que vous avez <b>prises</b> → que vous avez <b>fournies</b></td></tr></tbody></table>
+<div class="enc al"><span class="t">LE PIÈGE DU « QUE »</span>« Les pièces <b>que</b> vous avez fournies » : le « que » reprend « les pièces », placé avant le verbe. L'accord se fait donc, alors même que l'auxiliaire est avoir.</div>
+</div>
+<h2><span class="num">2 ·</span>Le bon mode après certaines expressions en « que »</h2>
+<div class="carte">
+<p>Certaines expressions imposent le subjonctif, d'autres l'interdisent. Repérez d'abord laquelle précède le verbe ; puis, pour <b>ENTENDRE</b> la bonne forme, remplacez le verbe par <b>faire</b> : « que vous fassiez » est un subjonctif, « que vous faites » un indicatif.</p>
+<table><thead><tr><th>Après…</th><th>Le mode</th><th>Exemples justes</th></tr></thead><tbody><tr><td><b>il faut que, afin que, pour que, bien que, avant que</b></td><td><b>Subjonctif</b></td><td>Il faut que vous <b>envoyiez</b> · afin que nous <b>puissions</b> · bien que le délai <b>soit</b> dépassé</td></tr><tr><td><b>après que, parce que, pendant que, dès que</b></td><td><b>Indicatif</b></td><td>Après que vous <b>avez</b> signé · après que nous <b>aurons</b> reçu le bon</td></tr><tr><td><b>si</b> de condition + présent</td><td>Futur, présent ou impératif dans l'autre partie</td><td>Si vous nous <b>transmettez</b> le RIB, nous <b>effectuerons</b> le virement</td></tr><tr><td><b>si</b> de condition + imparfait</td><td>Conditionnel dans l'autre partie</td><td>Si vous <b>pouviez</b> nous rappeler, nous en <b>serions</b> ravis</td></tr></tbody></table>
+<div class="enc al"><span class="t">LA RÈGLE DU SI DE CONDITION</span>Quand <b>si</b> veut dire « à condition que », jamais de conditionnel juste après : on écrit « si vous <b>pouviez</b> nous rappeler », pas « si vous pourriez ». Ne pas confondre avec le <b>si</b> d'une question indirecte, où le conditionnel est correct : « nous aimerions savoir si vous pourriez nous recevoir ».</div>
+</div>
+<h2><span class="num">3 ·</span>Les conjugaisons qui piègent</h2>
+<div class="carte">
+<p>Quelques formes reviennent sans cesse dans les mails et se voient immédiatement quand elles sont fausses.</p>
+<table><thead><tr><th>Forme</th><th>La bonne écriture</th><th>À ne pas écrire</th></tr></thead><tbody><tr><td><b>faire, dire</b> avec vous</td><td>vous <b>faites</b> · vous <b>dites</b> (seuls dire et redire font « dites » : vous contredisez, vous prédisez)</td><td>vous faîtes · vous faisez · vous disez</td></tr><tr><td><b>prier</b></td><td>je vous <b>prie</b> d'agréer…</td><td>je vous pris · je vous prit</td></tr><tr><td><b>résoudre</b> au futur</td><td>nous <b>résoudrons</b></td><td>nous résolverons</td></tr><tr><td><b>appeler, rappeler</b></td><td>il <b>rappellera</b> · nous <b>appellerons</b> : deux l devant un e muet (mais nous appelons)</td><td>il rappelera</td></tr><tr><td><b>Le sujet éloigné</b></td><td>Le verbe s'accorde avec son sujet, même loin : « Les frais de dossier vous <b>incombent</b> »</td><td>Les frais de dossier vous incombe</td></tr></tbody></table>
+<div class="enc ci"><span class="t">LE RÉFLEXE</span>Avant d'envoyer, cherchez le sujet de chaque verbe : beaucoup de fautes d'accord viennent d'un mot placé entre les deux.</div>
+</div>
+<h2><span class="num">4 ·</span>À retenir</h2>
+<div class="carte"><ol class="q"><li>Avec être, on accorde avec le sujet. Avec avoir, on n'accorde qu'avec un COD placé avant.</li><li>Mis, pris : remplacez le participe pour entendre l'accord ; remplacez le verbe par « faire » pour entendre le subjonctif.</li><li>Jamais de conditionnel juste après le « si » de condition. Après « après que », l'indicatif.</li><li>Vous faites, vous dites, je vous prie, nous résoudrons : quatre formes à connaître par cœur.</li></ol></div>
+<footer>TMK Performances - N° Siret : 49841924100027 - Code NAF : 8559A</footer>
+</div>
+</body></html>
